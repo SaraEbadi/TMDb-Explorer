@@ -11,7 +11,7 @@ import com.aparat.androidinterview.service.TvShowApi
 
 class RepositoryImp(private val movieApi: MovieApi) : Repository {
 
-    override suspend fun getMovies(page: Int): Either<CallError, ResponseList<MovieResponse>> {
+    override suspend fun getMovies(page: Int): ResponseList<MovieResponse> {
         return movieApi.getPopularMovies(page)
     }
 
