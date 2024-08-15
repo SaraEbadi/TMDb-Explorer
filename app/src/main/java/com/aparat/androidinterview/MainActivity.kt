@@ -20,7 +20,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.aparat.androidinterview.presentation.movies.navigateToMovies
+import com.aparat.androidinterview.systemdesign.navigation.TMDbNavHost
 import com.aparat.androidinterview.systemdesign.navigation.TopLevelDestination
 import com.aparat.androidinterview.systemdesign.theme.AparatAndroidInterviewTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +35,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AparatAndroidInterviewTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                val navController = rememberNavController()
+                Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
+                    BottomBar(navController = navController)
+                }) { innerPadding ->
+                    TMDbNavHost(navController, innerPadding)
                 }
             }
         }
@@ -45,7 +52,7 @@ class MainActivity : ComponentActivity() {
         val route = backStackEntry?.destination?.route ?: ""
         selectedItem = when {
             route.contains("movies" , ignoreCase = true) -> 0
-            route.contains("series" , ignoreCase = true) -> 0
+            route.contains("series" , ignoreCase = true) -> 1
             else -> -1
         }
         NavigationBar {
@@ -70,9 +77,9 @@ class MainActivity : ComponentActivity() {
             launchSingleTop = true
             restoreState = true
         }
-//        when(topLevelNavOptions){
-//            TopLevelDestination.MOVIES ->navController.
-//        }
+        when(topLevelDestination){
+            TopLevelDestination.MOVIES -> navController.navigateToMovies(topLevelNavOptions)
+            else -> {}
+        }
     }
-
 }

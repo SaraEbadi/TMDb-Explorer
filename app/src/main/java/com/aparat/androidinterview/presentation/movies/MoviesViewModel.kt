@@ -6,8 +6,10 @@ import com.aparat.androidinterview.UiState
 import com.aparat.androidinterview.domain.MovieUseCase
 import com.aparat.androidinterview.model.MovieResponse
 import com.aparat.androidinterview.model.ResponseList
+import com.aparat.androidinterview.model.error.NetworkError
 import com.aparat.androidinterview.presentation.ui_model.MovieItem
 import com.aparat.androidinterview.presentation.ui_model.toMovieItem
+import com.aparat.androidinterview.util.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MoviesViewModel@Inject constructor(
-    val moviesUseCase: MovieUseCase
+    private val moviesUseCase: MovieUseCase,
+    private val resourceProvider: ResourceProvider
 ): ViewModel() {
     private companion object {
         private const val QUERY_DEBOUNCE_IN_MILLIS = 500L
@@ -29,13 +32,19 @@ class MoviesViewModel@Inject constructor(
     private val _state: MutableStateFlow<UiState<List<MovieItem>>> = MutableStateFlow(UiState.Loading)
     val state: MutableStateFlow<UiState<List<MovieItem>>> = _state
 
-    suspend fun fetchMovies() {
+    fun fetchMovies() {
         viewModelScope.launch {
             _state.value = UiState.Loading
             moviesUseCase(currentPage?.inc() ?:0).fold(
-                ifRight = { ::success },
-                ifLeft = { ::failure }
+                ifRight = ::success,
+                ifLeft = ::failure
             )
+        }
+    }
+
+    fun onLoadMore() {
+        if (_state.value != UiState.Loading && currentPage != null && currentPage!! < totalPage) {
+            fetchMovies()
         }
     }
 
@@ -51,7 +60,7 @@ class MoviesViewModel@Inject constructor(
         }
     }
 
-    private fun failure(throwable: Throwable) {
-        _state.value
+    private fun failure(error: NetworkError) {
+        _state.value = UiState.Error(resourceProvider.getErrorMessage(error))
     }
 }
