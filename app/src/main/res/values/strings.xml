@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AparatAndroidInterview</string>
+    <string name="error_connection">Connection Failed!</string>
+    <string name="error_not_defined">Something Bad Happened!</string>
+    <string name="error_timeout">Request timed out!</string>
+    <string name="error_unauthorized">You are not authorized to do this!</string>
+    <string name="error_null">Nothing received!</string>
 </resources>
