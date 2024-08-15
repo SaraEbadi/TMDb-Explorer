@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.aparat.androidinterview"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.aparat.androidinterview"
