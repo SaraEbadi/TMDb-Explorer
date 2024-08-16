@@ -7,8 +7,8 @@ import com.aparat.androidinterview.model.ResponseList
 import com.aparat.androidinterview.model.TvShowResponse
 
 
-interface Repository {
 
+interface Repository {
     suspend fun getMovies(page: Int): ResponseList<MovieResponse>
-//    suspend fun getTvShow(page: Int): Either<CallError, ResponseList<TvShowResponse>>
+    suspend fun searchMovie(query: String, page: Int): ResponseList<MovieResponse>
 }

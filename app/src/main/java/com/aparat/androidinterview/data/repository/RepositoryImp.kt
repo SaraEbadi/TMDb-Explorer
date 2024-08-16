@@ -15,8 +15,8 @@ class RepositoryImp(private val movieApi: MovieApi) : Repository {
         return movieApi.getPopularMovies(page)
     }
 
-//    override suspend fun getTvShow(page: Int):  Either<CallError,ResponseList<TvShowResponse>> {
-//        return tvShowApi.getPopularTvShows(page)
-//    }
+    override suspend fun searchMovie(query: String, page: Int): ResponseList<MovieResponse>{
+        return movieApi.searchMovie(query, page)
+    }
 
 }

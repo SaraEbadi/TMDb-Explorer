@@ -6,45 +6,56 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.aparat.androidinterview.UiState
+import com.aparat.androidinterview.R
+import com.aparat.androidinterview.util.UiState
 import com.aparat.androidinterview.presentation.ui_model.MovieItem
 import com.aparat.androidinterview.systemdesign.component.TMDbProgress
+import com.aparat.androidinterview.util.extractYear
 
 @Composable
 fun MoviesScreen(
     modifier: Modifier = Modifier,
     onLoadMore: () -> Unit,
-    onItemClicked: (MovieItem) -> Unit = {},
-//    moviesResponse: List<MovieResponse>,
-    movieUiState: UiState<List<MovieItem>>
+    onSearchQueryChange: (String) -> Unit,
+    searchQueryTextState: State<String?>,
+    movieUiState: UiState<List<MovieItem>>,
+    onItemClicked: (MovieItem) -> Unit = {}
 ) {
     when(movieUiState){
-        is UiState.Success -> MovieContent(modifier, onLoadMore, onItemClicked, movieUiState)
+        is UiState.Success -> MovieContent(modifier, onLoadMore, onItemClicked, movieUiState, searchQueryTextState, onSearchQueryChange)
         is UiState.Loading -> ShowProgress()
         is UiState.Error -> ShowToast(movieUiState.message.orEmpty())
     }
-    
-
-
-
 }
 
 @Composable
@@ -58,17 +69,14 @@ fun ShowProgress() {
 fun MovieContent(modifier: Modifier = Modifier,
                  onLoadMore: () -> Unit,
                  onItemClicked: (MovieItem) -> Unit = {},
-    moviesItems: UiState<List<MovieItem>>,
+                 moviesItems: UiState<List<MovieItem>>,
+                 searchQueryTextState: State<String?>,
+                 onSearchQueryChange: (String) -> Unit,
     ){
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-//        Row (modifier = Modifier
-//            .fillMaxWidth()
-//            .height(32.dp).background(R.color.purple_500)){
-//
-//        }
-
+        TextField(searchQueryTextState, onSearchQueryChange)
         MovieList(
             modifier = Modifier
                 .weight(1f)
@@ -82,6 +90,27 @@ fun MovieContent(modifier: Modifier = Modifier,
             }
         )
     }
+}
+@Composable
+internal fun TextField(
+    searchQueryTextState: State<String?>,
+    onSearchQueryChange: (String) -> Unit
+) {
+    OutlinedTextField(
+        value = searchQueryTextState.value.orEmpty(),
+        onValueChange = {
+            onSearchQueryChange(it)
+        },
+        placeholder = { Text(text = stringResource(id = R.string.hint_search)) },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Done
+        ),
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .testTag("search_users")
+    )
 }
 
 @Composable

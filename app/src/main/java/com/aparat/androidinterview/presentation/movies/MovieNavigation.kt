@@ -24,10 +24,16 @@ fun NavGraphBuilder.moviesScreen(navController: NavController) {
         composable<Movies> {
             val viewModel: MoviesViewModel = hiltViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
-            MoviesScreen(onItemClicked = {
-//                navController.navigate()
-            }, onLoadMore = { viewModel.onLoadMore() },
-                movieUiState = state
+            val searchQueryTextState = viewModel.searchQueryText.collectAsStateWithLifecycle()
+
+            MoviesScreen(
+                onLoadMore = if (searchQueryTextState.value.isNullOrBlank()) viewModel::onLoadMore else viewModel::onSearchLoadMore,
+                onSearchQueryChange = viewModel::onSearchQueryChange,
+                searchQueryTextState = searchQueryTextState,
+                movieUiState = state,
+                onItemClicked = {
+                    navController.navigate(MovieDetails(it))
+                }
             )
         }
     }
