@@ -20,11 +20,11 @@ interface TvShowApi {
     @GET("tv/popular")
     suspend fun getPopularTvShows(
         @Query(PAGE) page: Int
-    ): Either<CallError, ResponseList<TvShowResponse>>
+    ): ResponseList<TvShowResponse>
 
     @GET("search/tv")
     suspend fun searchTvShows(
         @Query(QUERY) query: String,
         @Query(PAGE) page: Int
-    ): Either<CallError, ResponseList<TvShowResponse>>
+    ): ResponseList<TvShowResponse>
 }

@@ -23,6 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.aparat.androidinterview.presentation.movies.navigateToMovies
+import com.aparat.androidinterview.presentation.tvshows.navigateToTvShow
 import com.aparat.androidinterview.systemdesign.navigation.TMDbNavHost
 import com.aparat.androidinterview.systemdesign.navigation.TopLevelDestination
 import com.aparat.androidinterview.systemdesign.theme.AparatAndroidInterviewTheme
@@ -79,6 +80,7 @@ class MainActivity : ComponentActivity() {
         }
         when(topLevelDestination){
             TopLevelDestination.MOVIES -> navController.navigateToMovies(topLevelNavOptions)
+            TopLevelDestination.SHOWS -> navController.navigateToTvShow(topLevelNavOptions)
             else -> {}
         }
     }

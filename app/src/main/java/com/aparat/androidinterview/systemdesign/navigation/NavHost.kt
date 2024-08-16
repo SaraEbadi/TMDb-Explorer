@@ -8,10 +8,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.aparat.androidinterview.presentation.movies.MovieRoot
 import com.aparat.androidinterview.presentation.movies.moviesScreen
+import com.aparat.androidinterview.presentation.tvshows.tvShowScreen
 
 @Composable
 fun TMDbNavHost(navController : NavHostController, padding: PaddingValues) {
     NavHost(navController = navController, startDestination = MovieRoot, modifier = Modifier.padding(padding) ){
         moviesScreen(navController)
+        tvShowScreen(navController)
     }
 }
