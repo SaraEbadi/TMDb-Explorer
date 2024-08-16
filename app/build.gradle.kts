@@ -55,6 +55,7 @@ dependencies {
         implementation(androidx.core.ktx)
         implementation(androidx.material3)
         implementation(androidx.material3.adaptive)
+        implementation(androidx.compose.material3.iconsExtended)
         implementation(compose.navigation)
         implementation(androidx.ui.graphics)
         implementation(androidx.activity.compose)

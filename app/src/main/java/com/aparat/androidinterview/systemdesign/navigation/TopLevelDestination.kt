@@ -11,18 +11,18 @@ enum class TopLevelDestination(
     val iconText: String,
 ){
     MOVIES(
-        selectedIcon = Icons.Filled.Settings,
-        unselectedIcon = Icons.Outlined.Settings,
+        selectedIcon = Icons.Filled.Movie,
+        unselectedIcon = Icons.Outlined.Movie,
         iconText = "Movies"
     ),
     SHOWS(
-    selectedIcon = Icons.Filled.Settings,
-    unselectedIcon = Icons.Outlined.Settings,
-    iconText = "Shows"
+        selectedIcon = Icons.Filled.Tv,
+        unselectedIcon = Icons.Outlined.Tv,
+        iconText = "Shows"
     ),
     MORE(
-    selectedIcon = Icons.Filled.Menu,
-    unselectedIcon = Icons.Outlined.Menu,
-    iconText = "More"
+        selectedIcon = Icons.Filled.Menu,
+        unselectedIcon = Icons.Outlined.Menu,
+        iconText = "More"
     )
 }
