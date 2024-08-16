@@ -60,8 +60,8 @@ fun MoviesScreen(
 
 @Composable
 fun ShowProgress() {
-    Box {
-        TMDbProgress()
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        TMDbProgress(modifier = Modifier.align(Alignment.Center))
     }
 }
 
@@ -121,13 +121,13 @@ fun MovieList(
     onShowDetail: (item: MovieItem) -> Unit
 ) {
     LazyVerticalStaggeredGrid(
-        columns = StaggeredGridCells.Fixed(2),
+        columns = StaggeredGridCells.Fixed(3),
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalItemSpacing = 16.dp
     ) {
-        itemsIndexed(movies!!) { index, item ->
+        itemsIndexed(movies) { index, item ->
             if(index == movies.lastIndex) onLoadMore()
             MovieItem(item = item) {
                 onShowDetail(item)
@@ -139,26 +139,29 @@ fun MovieList(
 @Composable
 fun MovieItem(modifier: Modifier = Modifier,
               item: MovieItem?,
-              onItemClicked: () -> Unit = {}) {
+              onItemClicked: () -> Unit) {
     item?.let { movie ->
         Card(
-            modifier = modifier.clickable { onItemClicked() },
+            modifier = modifier
+                .height(180.dp)
+                .clickable { onItemClicked() },
             elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column() {
                 AsyncImage(
+                    alignment = Alignment.Center,
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(1f)
                         .clip(RoundedCornerShape(8.dp)),
-                    model = movie.thumbnail, contentDescription = movie?.title
+                    model = "https://media.themoviedb.org/t/p/w440_and_h660_face/${movie.thumbnail}", contentDescription = movie?.title
                 )
-                Text(text = movie.title, style = MaterialTheme.typography.titleMedium)
-                Text(text = "(${movie.date})", style = MaterialTheme.typography.bodyMedium)
-                Text(
-                    text = "Rating: ${movie.voteAverage}",
-                    style = MaterialTheme.typography.bodyMedium
+                Text(modifier = Modifier.padding(start = 8.dp),
+                    text = movie.title.orEmpty(),fontSize = 12.sp,
+                    style = MaterialTheme.typography.titleSmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Row (){
                     Text(modifier = Modifier.padding(start = 8.dp), text = "${movie.date?.extractYear() ?: ""}", fontSize = 10.sp, style = MaterialTheme.typography.bodyMedium)
