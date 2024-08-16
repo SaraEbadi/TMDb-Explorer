@@ -1,5 +1,6 @@
 package com.aparat.androidinterview.di
 
+import android.content.Context
 import arrow.retrofit.adapter.either.EitherCallAdapterFactory
 import com.aparat.androidinterview.BuildConfig
 import com.aparat.androidinterview.service.AuthInterceptor
@@ -10,12 +11,15 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
+import java.io.File
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -37,10 +41,17 @@ object NetworkModule {
 
     @Provides
     fun provideOkHttpClient(
+        @ApplicationContext context: Context,
         authInterceptor: AuthInterceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .cache(
+                Cache(
+                    directory = File(context.cacheDir, "http_cache"),
+                    maxSize = 5L * 1024 * 1024 // 5 MB
+                )
+            )
             .addInterceptor(authInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .build()
