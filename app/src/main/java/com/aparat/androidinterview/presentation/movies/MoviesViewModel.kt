@@ -27,11 +27,15 @@ class MoviesViewModel@Inject constructor(
         private const val QUERY_DEBOUNCE_IN_MILLIS = 500L
     }
 
-    private var currentPage: Int? = null
+    private var currentPage: Int = 0
     private var totalPage: Int = 0
 
     private val _state: MutableStateFlow<UiState<List<MovieItem>>> = MutableStateFlow(UiState.Loading)
     val state: MutableStateFlow<UiState<List<MovieItem>>> = _state
+
+    init {
+        fetchMovies()
+    }
 
     fun fetchMovies() {
         viewModelScope.launch {
