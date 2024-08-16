@@ -13,6 +13,7 @@ import com.aparat.androidinterview.util.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -34,8 +35,8 @@ class MoviesViewModel@Inject constructor(
 
     fun fetchMovies() {
         viewModelScope.launch {
-            _state.value = UiState.Loading
-            moviesUseCase(currentPage?.inc() ?:0).fold(
+            _state.update { UiState.Loading }
+            moviesUseCase(currentPage.inc()).fold(
                 ifRight = ::success,
                 ifLeft = ::failure
             )
@@ -53,14 +54,14 @@ class MoviesViewModel@Inject constructor(
         totalPage = response.totalPages ?: 0
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
-                _state.value = UiState.Success(response.results.map {
+                _state.update { UiState.Success(response.results.map {
                     it.toMovieItem()
-                })
+                }) }
             }
         }
     }
 
     private fun failure(error: NetworkError) {
-        _state.value = UiState.Error(resourceProvider.getErrorMessage(error))
+        _state.update {  UiState.Error(resourceProvider.getErrorMessage(error)) }
     }
 }
