@@ -1,15 +1,12 @@
 package com.aparat.androidinterview.data.repository
 
-import arrow.core.Either
-import arrow.retrofit.adapter.either.networkhandling.CallError
+import com.aparat.androidinterview.data.repository.movies.MoviesRepository
 import com.aparat.androidinterview.model.MovieResponse
 import com.aparat.androidinterview.model.ResponseList
-import com.aparat.androidinterview.model.TvShowResponse
 import com.aparat.androidinterview.service.MovieApi
-import com.aparat.androidinterview.service.TvShowApi
 
 
-class RepositoryImp(private val movieApi: MovieApi) : Repository {
+class MoviesRepositoryImp(private val movieApi: MovieApi) : MoviesRepository {
 
     override suspend fun getMovies(page: Int): ResponseList<MovieResponse> {
         return movieApi.getPopularMovies(page)

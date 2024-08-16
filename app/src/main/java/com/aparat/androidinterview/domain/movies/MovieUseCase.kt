@@ -1,20 +1,19 @@
-package com.aparat.androidinterview.domain
+package com.aparat.androidinterview.domain.movies
 
-import com.aparat.androidinterview.data.repository.Repository
+import com.aparat.androidinterview.data.repository.movies.MoviesRepository
 import arrow.core.Either
-import arrow.retrofit.adapter.either.networkhandling.CallError
+import com.aparat.androidinterview.domain.BaseUseCase
 import com.aparat.androidinterview.domain.mapper.ErrorMapper
 import com.aparat.androidinterview.model.MovieResponse
 import com.aparat.androidinterview.model.ResponseList
 import com.aparat.androidinterview.model.error.NetworkError
 import javax.inject.Inject
-import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities.Private
 
-class MovieUseCase @Inject constructor(private val repository: Repository,
+class MovieUseCase @Inject constructor(private val moviesRepository: MoviesRepository,
                                        errorMapper: ErrorMapper): BaseUseCase(errorMapper) {
     suspend operator fun invoke (page: Int): Either<NetworkError, ResponseList<MovieResponse>>{
         return safeApiCall {
-            repository.getMovies(page)
+            moviesRepository.getMovies(page)
         }
     }
 }
