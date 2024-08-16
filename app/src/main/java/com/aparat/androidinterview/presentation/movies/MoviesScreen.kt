@@ -131,6 +131,11 @@ fun MovieItem(modifier: Modifier = Modifier,
                     text = "Rating: ${movie.voteAverage}",
                     style = MaterialTheme.typography.bodyMedium
                 )
+                Row (){
+                    Text(modifier = Modifier.padding(start = 8.dp), text = "${movie.date?.extractYear() ?: ""}", fontSize = 10.sp, style = MaterialTheme.typography.bodyMedium)
+                    Text(text = "(${movie.voteAverage})", fontSize = 10.sp, style = MaterialTheme.typography.bodyMedium)
+                }
+
             }
         }
     }
