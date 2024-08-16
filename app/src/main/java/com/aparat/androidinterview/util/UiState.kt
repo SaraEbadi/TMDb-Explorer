@@ -1,4 +1,4 @@
-package com.aparat.androidinterview
+package com.aparat.androidinterview.util
 
 sealed class UiState<out T : Any?> {
     data class Success<out T : Any?>(val value: T) : UiState<T>()

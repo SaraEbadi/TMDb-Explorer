@@ -2,8 +2,8 @@ package com.aparat.androidinterview.service
 
 import arrow.core.Either
 import arrow.retrofit.adapter.either.networkhandling.CallError
-import com.aparat.androidinterview.PAGE
-import com.aparat.androidinterview.QUERY
+import com.aparat.androidinterview.util.PAGE
+import com.aparat.androidinterview.util.QUERY
 import com.aparat.androidinterview.model.ResponseList
 import com.aparat.androidinterview.model.TvShowResponse
 import retrofit2.http.GET

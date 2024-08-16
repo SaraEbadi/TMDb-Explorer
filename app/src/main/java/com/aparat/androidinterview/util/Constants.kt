@@ -1,4 +1,4 @@
-package com.aparat.androidinterview
+package com.aparat.androidinterview.util
 
 const val PAGE = "page"
 const val QUERY = "query"
