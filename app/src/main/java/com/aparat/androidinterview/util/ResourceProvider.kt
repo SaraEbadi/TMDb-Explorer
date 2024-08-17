@@ -3,8 +3,8 @@ package com.aparat.androidinterview.util
 import android.content.Context
 import androidx.annotation.StringRes
 import com.aparat.androidinterview.R
-import com.aparat.androidinterview.model.error.HttpError
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.error.HttpError
+import com.aparat.androidinterview.domain.model.error.NetworkError
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

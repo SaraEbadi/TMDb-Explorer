@@ -1,4 +1,4 @@
-package com.aparat.androidinterview.di
+package com.aparat.androidinterview.data.di
 
 import com.aparat.androidinterview.data.repository.movies.MoviesRepository
 import com.aparat.androidinterview.data.repository.MoviesRepositoryImp

@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.aparat.androidinterview.util.UiState
 import com.aparat.androidinterview.domain.movies.MovieUseCase
 import com.aparat.androidinterview.domain.movies.SearchMovieUseCase
-import com.aparat.androidinterview.model.MovieResponse
-import com.aparat.androidinterview.model.ResponseList
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.MovieResponse
+import com.aparat.androidinterview.domain.model.ResponseList
+import com.aparat.androidinterview.domain.model.error.NetworkError
 import com.aparat.androidinterview.presentation.ui_model.MovieItem
 import com.aparat.androidinterview.presentation.ui_model.toMovieItem
 import com.aparat.androidinterview.util.ResourceProvider

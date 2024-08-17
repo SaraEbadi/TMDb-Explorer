@@ -1,6 +1,6 @@
 package com.aparat.androidinterview.presentation.ui_model
 
-import com.aparat.androidinterview.model.TvShowResponse
+import com.aparat.androidinterview.domain.model.TvShowResponse
 import kotlinx.serialization.Serializable
 
 @Serializable

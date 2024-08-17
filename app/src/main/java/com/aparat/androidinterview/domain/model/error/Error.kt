@@ -1,4 +1,4 @@
-package com.aparat.androidinterview.model.error
+package com.aparat.androidinterview.domain.model.error
 
 sealed class NetworkError {
     /**

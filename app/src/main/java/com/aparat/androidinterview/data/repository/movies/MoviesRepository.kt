@@ -1,7 +1,7 @@
 package com.aparat.androidinterview.data.repository.movies
 
-import com.aparat.androidinterview.model.MovieResponse
-import com.aparat.androidinterview.model.ResponseList
+import com.aparat.androidinterview.domain.model.MovieResponse
+import com.aparat.androidinterview.domain.model.ResponseList
 
 
 interface MoviesRepository {

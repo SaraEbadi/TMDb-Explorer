@@ -2,7 +2,7 @@ package com.aparat.androidinterview.domain
 
 import arrow.core.Either
 import com.aparat.androidinterview.domain.mapper.ErrorMapper
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.error.NetworkError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -1,7 +1,7 @@
 package com.aparat.androidinterview.util
 
 import androidx.annotation.StringRes
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.error.NetworkError
 
 interface BaseResourceProvider {
 

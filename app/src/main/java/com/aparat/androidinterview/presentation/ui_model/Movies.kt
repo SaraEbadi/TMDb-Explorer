@@ -1,6 +1,6 @@
 package com.aparat.androidinterview.presentation.ui_model
 
-import com.aparat.androidinterview.model.MovieResponse
+import com.aparat.androidinterview.domain.model.MovieResponse
 import kotlinx.serialization.Serializable
 
 @Serializable

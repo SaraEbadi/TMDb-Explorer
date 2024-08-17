@@ -1,7 +1,7 @@
 package com.aparat.androidinterview.domain.mapper
 
-import com.aparat.androidinterview.model.error.HttpError
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.error.HttpError
+import com.aparat.androidinterview.domain.model.error.NetworkError
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException

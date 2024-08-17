@@ -1,7 +1,7 @@
 package com.aparat.androidinterview.data.repository.shows
 
-import com.aparat.androidinterview.model.ResponseList
-import com.aparat.androidinterview.model.TvShowResponse
+import com.aparat.androidinterview.domain.model.ResponseList
+import com.aparat.androidinterview.domain.model.TvShowResponse
 import com.aparat.androidinterview.service.TvShowApi
 
 class ShowsRepositoryImp(private val tvShowApi: TvShowApi): ShowsRepository {

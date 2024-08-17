@@ -1,4 +1,4 @@
-package com.aparat.androidinterview.di
+package com.aparat.androidinterview.data.di
 
 import android.content.Context
 import arrow.retrofit.adapter.either.EitherCallAdapterFactory

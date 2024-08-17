@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aparat.androidinterview.domain.tvshows.SearchTvShowUseCase
 import com.aparat.androidinterview.domain.tvshows.TvShowUseCase
-import com.aparat.androidinterview.model.ResponseList
-import com.aparat.androidinterview.model.TvShowResponse
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.ResponseList
+import com.aparat.androidinterview.domain.model.TvShowResponse
+import com.aparat.androidinterview.domain.model.error.NetworkError
 import com.aparat.androidinterview.presentation.ui_model.TvShowItem
 import com.aparat.androidinterview.presentation.ui_model.toTvShowItem
 import com.aparat.androidinterview.util.ResourceProvider

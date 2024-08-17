@@ -1,6 +1,6 @@
 package com.aparat.androidinterview.domain.mapper
 
-import com.aparat.androidinterview.model.error.NetworkError
+import com.aparat.androidinterview.domain.model.error.NetworkError
 import javax.inject.Inject
 
 class ErrorMapper @Inject constructor(private val httpErrorMapper: HttpErrorMapper) {
