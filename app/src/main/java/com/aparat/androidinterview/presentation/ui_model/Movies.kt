@@ -1,7 +1,9 @@
 package com.aparat.androidinterview.presentation.ui_model
 
 import com.aparat.androidinterview.model.MovieResponse
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MovieItem(
     val id: Int,
     val title: String,
